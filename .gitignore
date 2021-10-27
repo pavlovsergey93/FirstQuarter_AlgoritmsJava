@@ -4,4 +4,5 @@
 *xml
 /target
 /src/test
-/main/reesources
+src/main/resources
+.idea
