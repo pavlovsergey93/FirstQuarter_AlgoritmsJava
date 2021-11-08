@@ -2,7 +2,7 @@ package com.geekbrains.algorithms.lesson5;
 
 public class Main {
     public static void main(String[] args) {
-        System.out.println(exponentiation(2, 10));
+        System.out.println(exponentiation(-2, 9));
     }
     // Возведение в степень рекурсивным методом
     public static int exponentiation(int number, int degre){
