@@ -12,11 +12,13 @@ public class MyTree<K extends Comparable<K>, V>{
         Node leftTree;
         Node rightTree;
         int size;
+        int height;
 
         public Node(K key, V value){
             this.key = key;
             this.value = value;
             this.size = 1;
+            height = 0;
         }
     }
     public V get(K key) {
@@ -34,6 +36,22 @@ public class MyTree<K extends Comparable<K>, V>{
             return get(node.leftTree, key);
         }else {
             return get(node.rightTree, key);
+        }
+    }
+    public int height(){
+        return height(root);
+    }
+    private int height(Node node){
+        if (node == null){
+            return 0;
+        }else if(node.leftTree == null && node.rightTree == null){
+            return 0;
+        }else if(node.leftTree == null){
+            return node.rightTree.height + 1;
+        }else if(node.rightTree == null){
+            return node.leftTree.height + 1;
+        }else{
+            return (Math.max(node.leftTree.height, node.rightTree.height) + 1);
         }
     }
 
@@ -78,6 +96,7 @@ public class MyTree<K extends Comparable<K>, V>{
             node.rightTree = put(node.rightTree, key, value);
         }
         node.size = 1 + size(node.leftTree) + size(node.rightTree);
+        node.height = height(node);
         return node;
     }
 
@@ -102,6 +121,7 @@ public class MyTree<K extends Comparable<K>, V>{
         }
         node.leftTree = deleteMinNode(node.leftTree);
         node.size = 1 + size(node.leftTree) + size(node.rightTree);
+        node.height = height(node);
         return node;
     }
 
@@ -139,7 +159,24 @@ public class MyTree<K extends Comparable<K>, V>{
             node.leftTree = temp.leftTree;
         }
         node.size = 1 + size(node.leftTree) + size(node.rightTree);
+        node.height = height(node);
         return node;
+    }
+    public boolean isBalance() {
+        return isBalance(root);
+    }
+    private boolean isBalance(Node node){
+        if (node == null){
+            return true;
+        }else if (node.leftTree == null && node.rightTree == null){
+            return true;
+        }else if (height(node.leftTree) - height(node.rightTree) <= 1
+                && isBalance(node.leftTree)
+                && isBalance(node.rightTree)){
+            return  true;
+        }
+        return false;
+
     }
 
 }
