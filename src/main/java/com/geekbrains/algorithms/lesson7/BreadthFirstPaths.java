@@ -13,7 +13,7 @@ public class BreadthFirstPaths{
         edgeTo = new int[graph.getCountVer()];
         bfp(graph, source);
     }
-
+    // Поиск в ширину
     public void bfp(Graph graph, int source) {
         LinkedList<Integer> queue = new LinkedList<>();
         queue.addFirst(source);
@@ -39,12 +39,16 @@ public class BreadthFirstPaths{
         }
         LinkedList<Integer> stack = new LinkedList<>();
         int vertex = toVex;
+        int way = 0;
         while (vertex != source) {
             stack.push(vertex);
             vertex = edgeTo[vertex];
+            way++;
         }
+        System.out.println("Длинна пути: " + way);
         return stack;
     }
+
 }
 
 

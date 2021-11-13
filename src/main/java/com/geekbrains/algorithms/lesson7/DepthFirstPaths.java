@@ -34,10 +34,13 @@ public class DepthFirstPaths {
         }
         LinkedList<Integer> stack = new LinkedList<>();
         int vertex = toVex;
+        int way = 0;
         while (vertex != source){
             stack.push(vertex);
             vertex = edgeTo[vertex];
+            way++;
         }
+        System.out.println("Длина пути: " + way);
         return stack;
 
     }
